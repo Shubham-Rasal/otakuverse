@@ -125,9 +125,9 @@ export default function MangaTranslator() {
                   />
                 ) : (
                   <div className="space-y-4">
-                    <Upload className="w-12 h-12 mx-auto text-gray-400" />
+                    <Upload className="w-12 h-12 mx-auto text-gray-100" />
                     <div>
-                      <p className="text-lg font-medium">Drop your manga panel here</p>
+                      <p className="text-lg font-medium text-gray-100">Drop your manga panel here</p>
                       <p className="text-sm text-gray-400">or click to upload (PNG or JPG only)</p>
                     </div>
                   </div>
@@ -144,9 +144,9 @@ export default function MangaTranslator() {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <label className="text-sm text-gray-400">Translation Method</label>
+                <label className="text-sm text-gray-100">Translation Method</label>
                 <Select defaultValue="google">
-                  <SelectTrigger className="bg-[#2C2D32] border-0">
+                  <SelectTrigger className="bg-[#2C2D32] border-0 text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -158,9 +158,9 @@ export default function MangaTranslator() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm text-gray-400">Font Style</label>
+                <label className="text-sm text-gray-100">Font Style</label>
                 <Select defaultValue="manga">
-                  <SelectTrigger className="bg-[#2C2D32] border-0">
+                  <SelectTrigger className="bg-[#2C2D32] border-0 text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -172,7 +172,7 @@ export default function MangaTranslator() {
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 text-slate-100">
               <Button 
                 variant="outline" 
                 className="flex-1 bg-[#2C2D32] border-0 hover:bg-[#353940]"
@@ -219,7 +219,7 @@ export default function MangaTranslator() {
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      <ImageIcon className="w-12 h-12 mx-auto text-[#00FF90]" />
+                      <ImageIcon className="w-12 h-12 mx-auto text-[#00FF90] animate-spin" />
                     </motion.div>
                     <p className="text-lg text-gray-300">{loadingQuotes[currentQuote]}</p>
                   </div>
@@ -252,10 +252,14 @@ export default function MangaTranslator() {
         <div className="space-y-2">
           <h2 className="text-lg font-medium">Examples</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <Card key={i} className="bg-[#25262B] border-0 p-2">
+            {[1, 2, 3].map((i) => (
+              <Card
+                onClick={() => setImage(`/examples/0${i}.jpg`)}
+                key={i}
+                className="bg-[#25262B] border-0 p-2"
+              >
                 <img
-                  src={`/placeholder.svg?height=200&width=150`}
+                  src={`/examples/0${i}.jpg`}
                   alt={`Example ${i}`}
                   className="w-full h-auto rounded"
                 />
