@@ -2,3 +2,4 @@ dataset
 model.pt
 dataset.zip
 runs
+__pycache__
