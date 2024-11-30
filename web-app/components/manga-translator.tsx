@@ -204,7 +204,7 @@ export default function MangaTranslator() {
           </Card>
 
           {/* Output Section */}
-          <Card className="bg-[#25262B] border-0 p-6 min-h-[600px] relative overflow-hidden">
+          <Card className="bg-[#25262B] border-0 p-6  relative overflow-hidden">
             <AnimatePresence mode="wait">
               {isLoading ? (
                 <motion.div
@@ -229,7 +229,7 @@ export default function MangaTranslator() {
                   key="translated"
                   src={translatedImage} 
                   alt="Translated manga" 
-                  className="max-h-[500px] mx-auto"
+                  className=" mx-auto"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
