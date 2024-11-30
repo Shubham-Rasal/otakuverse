@@ -1,4 +1,4 @@
-![Otakuverse Logo](assets/logo.png)
+![Otakuverse Logo](assets/logo.svg)
 
 # Otakuverse: AI-Powered Manga Translation Platform 🎯
 > *Powered by [Spheron Network](https://spheron.network)*
