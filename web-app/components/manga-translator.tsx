@@ -30,6 +30,8 @@ export default function MangaTranslator() {
   const [currentQuote, setCurrentQuote] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [translatedImage, setTranslatedImage] = useState<string | null>(null)
+  const [translationMethod, setTranslationMethod] = useState('google')
+  const [font, setFont] = useState('animeace_i')
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -70,19 +72,51 @@ export default function MangaTranslator() {
   }
 
   const handleSubmit = async () => {
+    if (!image) {
+      setError('Please upload an image first.')
+      return
+    }
+
     setIsLoading(true)
     setError(null)
-    // Simulate loading with quote changes
+
+    // Start the loading quotes interval
     const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % loadingQuotes.length)
     }, 1000)
-    
-    // Simulate processing time of 3 seconds
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    
-    clearInterval(interval)
-    setIsLoading(false)
-    setTranslatedImage(image) // Set the translated image to be the same as the input image
+
+    try {
+      // Convert base64 to blob
+      const base64Response = await fetch(image);
+      const blob = await base64Response.blob();
+
+      // Create form data
+      const formData = new FormData();
+      formData.append('image', blob, 'manga.png');
+      formData.append('translation_method', translationMethod);
+      formData.append('font', font);
+
+      // Make API call
+      const response = await fetch('http://localhost:5000/api/translate', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to translate manga');
+      }
+
+      // Get the translated image
+      const translatedBlob = await response.blob();
+      const translatedUrl = URL.createObjectURL(translatedBlob);
+      setTranslatedImage(translatedUrl);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to translate manga');
+    } finally {
+      clearInterval(interval);
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -143,30 +177,33 @@ export default function MangaTranslator() {
             )}
 
             <div className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm text-gray-100">Translation Method</label>
-                <Select defaultValue="google">
-                  <SelectTrigger className="bg-[#2C2D32] border-0 text-white">
-                    <SelectValue />
+              <div className="flex gap-4">
+                <Select
+                  value={translationMethod}
+                  onValueChange={setTranslationMethod}
+                >
+                  <SelectTrigger className="w-[180px] bg-[#2C2D32] border-0">
+                    <SelectValue placeholder="Translation Method" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="google">Google Translate</SelectItem>
-                    <SelectItem value="deepl">DeepL</SelectItem>
-                    <SelectItem value="custom">Custom Model</SelectItem>
+                    <SelectItem value="hf">Hugging Face</SelectItem>
+                    <SelectItem value="baidu">Baidu</SelectItem>
+                    <SelectItem value="bing">Bing</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-sm text-gray-100">Font Style</label>
-                <Select defaultValue="manga">
-                  <SelectTrigger className="bg-[#2C2D32] border-0 text-white">
-                    <SelectValue />
+                <Select
+                  value={font}
+                  onValueChange={setFont}
+                >
+                  <SelectTrigger className="w-[180px] bg-[#2C2D32] border-0">
+                    <SelectValue placeholder="Select Font" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="manga">Manga Style</SelectItem>
-                    <SelectItem value="comic">Comic Sans</SelectItem>
-                    <SelectItem value="clean">Clean Modern</SelectItem>
+                    <SelectItem value="animeace_i">Anime Ace</SelectItem>
+                    <SelectItem value="mangati">Manga TI</SelectItem>
+                    <SelectItem value="ariali">Arial Italic</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -271,4 +308,3 @@ export default function MangaTranslator() {
     </div>
   )
 }
-
