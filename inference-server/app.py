@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_file
+from flask_cors import CORS
 from add_text import add_text
 from detect_bubbles import detect_bubbles
 from process_bubble import process_bubble
@@ -12,6 +13,7 @@ import io
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 # Constants
 MODEL = "model.pt"
