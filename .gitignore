@@ -1,5 +1,5 @@
 dataset
-model.pt
+# model.pt
 dataset.zip
 runs
 __pycache__

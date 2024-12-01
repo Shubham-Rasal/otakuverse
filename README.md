@@ -127,3 +127,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 *Note: This is a submission for the Spheron Network Bounty Program. The project demonstrates the capabilities of Spheron's decentralized infrastructure for hosting and storing AI-powered applications.*
+
+
+https://ubiquitous-enigma-q5qpqjv6j9wc45g7-5000.app.github.dev:5000/
+
+curl -X POST \
+  -F "image=@/home/bluequbit/Desktop/spheron/image.png" \
+  -F "translation_method=google" \
+  -F "font=animeace_i" \
+ https://ubiquitous-enigma-q5qpqjv6j9wc45g7-5000.app.github.dev:5000/api/translate \
+  -o translated_manga.png
