@@ -2,7 +2,7 @@ flask==2.3.3
 flask-cors==4.0.0
 ultralytics==8.0.196
 manga-ocr==0.1.10
-Pillow==10.0.1
+Pillow==10.3.0
 numpy==1.25.2
 opencv-python-headless==4.8.0.76
 gunicorn==21.2.0
