@@ -10,3 +10,4 @@ requests==2.31.0
 googletrans==3.1.0a0
 transformers==4.33.2
 torch==2.0.1
+translators==5.9.1
