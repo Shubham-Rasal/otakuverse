@@ -16,6 +16,29 @@ Otakuverse is a web app that uses AI to detect and translate text in manga panel
 - **Responsive UI**: Beautiful, modern interface built with Next.js and Tailwind CSS
 
 
+## 📁 Project Structure
+
+```
+├── assets/                     # Project assets
+│   ├── logo.svg               # Otakuverse logo
+│   └── image.png              # Other image assets
+├── web-app/                   # Next.js web application
+│   ├── app/                   # Next.js app directory
+│   │   ├── page.tsx          # Home page
+│   │   └── layout.tsx        # Root layout
+│   ├── components/           # Reusable components
+│   │   ├── ui/              # UI components (buttons, cards, etc.)
+│   │   └── manga-translator.tsx  # Main manga translation component
+│   ├── lib/                  # Utility libraries
+│   │   └── utils.ts         # Utility functions
+│   ├── public/              # Public assets
+│   │   └── spheron.svg      # Spheron logo
+│   └── styles/              # Global styles
+├── server/                   # Backend server (if applicable)
+│   └── api/                 # API endpoints
+├── docker-compose.yml       # Docker compose configuration
+└── README.md               # Project documentation
+
 ## 🚀 Quick Start
 
 ### Prerequisites

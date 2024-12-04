@@ -98,7 +98,7 @@ export default function MangaTranslator() {
       formData.append('font', font);
 
       // Make API call
-      const response = await fetch('http://localhost:5000/api/translate', {
+      const response = await fetch('http://provider.gpu.gpufarm.xyz:30180/api/translate', {
         method: 'POST',
         body: formData,
       });
