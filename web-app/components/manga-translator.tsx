@@ -21,7 +21,13 @@ const loadingQuotes = [
   "Converting speech bubbles...",
   "Decoding Japanese wisdom...",
   "Preparing your manga experience...",
-  "Almost there, just a few more panels..."
+  "Almost there, just a few more panels...",
+  "Polishing up the translation...",
+  "A pinch of Japanese magic...",
+  "Almost done, just give us a sec...",
+  "Manga magic in the making...",
+  "Your manga experience is just around the corner...",
+
 ]
 
 export default function MangaTranslator() {
@@ -84,7 +90,7 @@ export default function MangaTranslator() {
     // Start the loading quotes interval
     const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % loadingQuotes.length)
-    }, 1000)
+    }, 2000)
 
     try {
       // Convert base64 to blob
