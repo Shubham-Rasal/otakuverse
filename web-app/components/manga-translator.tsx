@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils"
 import { Upload, ImageIcon, Wand2, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from "framer-motion"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import Image from 'next/image'
 
 const loadingQuotes = [
   "Translating manga magic...",
@@ -123,11 +124,20 @@ export default function MangaTranslator() {
     <div className="min-h-screen bg-[#1A1B1E] text-white p-6">
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold text-[#00FF90]">Manga Translator</h1>
+          <h1 className="text-4xl font-bold text-[#00FF90]"> Otakuverse AI - Manga Translator</h1>
           <p className="text-gray-400">Transform your manga reading experience with AI-powered translation</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="flex items-center justify-center space-x-4 py-2">
+          <div className="text-center flex items-center gap-2">
+            <p className="text-sm text-gray-400">Powered by</p>
+            <a href="https://spheron.network" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
+              <Image src="/spheron.svg" alt="Spheron" width={120} height={120} className="p-2 rounded-sm bg-white text-white" />
+            </a>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
           {/* Input Section */}
           <Card className="bg-[#25262B] border-0 p-6 space-y-6">
             <div
@@ -291,12 +301,12 @@ export default function MangaTranslator() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {[1, 2, 3].map((i) => (
               <Card
-                onClick={() => setImage(`/examples/0${i}.jpg`)}
+                onClick={() => setImage(`/examples/0${i}.png`)}
                 key={i}
                 className="bg-[#25262B] border-0 p-2"
               >
                 <img
-                  src={`/examples/0${i}.jpg`}
+                  src={`/examples/0${i}.png`}
                   alt={`Example ${i}`}
                   className="w-full h-auto rounded"
                 />
