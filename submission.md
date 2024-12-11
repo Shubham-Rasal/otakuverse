@@ -129,3 +129,5 @@ MIT License - See LICENSE file for details
 - [ ] Provided all required information
 - [ ] Ensured demo links are working
 - [ ] Verified setup instructions are clear and complete
+
+https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble

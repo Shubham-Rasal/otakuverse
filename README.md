@@ -97,8 +97,10 @@ Otakuverse is built with a modern tech stack:
 - **Frontend**: Next.js, TailwindCSS, Framer Motion
 - **Backend**: Flask, OpenCV, PyTorch
 - **AI Models**: YOLOv8 for text detection, Various translation APIs
-- **Infrastructure**: Spheron Network for decentralized hosting and storage
+- **Infrastructure**: Spheron Network for decentralized training and inference
 
+
+### Model
 
 The model used to identify speech bubbles is YOLOv8. Using it directly doesn't give you good results as they are trained on a general dataset. So, we have trained our own dataset and fine-tuned the model for manga text detection.
 
@@ -108,21 +110,8 @@ Here are the data:
 
 - **Dataset**: [Manga Speech Bubbles Dataset](https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble/dataset/16)
 
-```latex
-@misc{
-                            mangas-bubble_dataset,
-                            title = { Mangas bubble Dataset },
-                            type = { Open Source Dataset },
-                            author = { Luciano Bastos Nunes },
-                            howpublished = { \url{ https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble } },
-                            url = { https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble },
-                            journal = { Roboflow Universe },
-                            publisher = { Roboflow },
-                            year = { 2022 },
-                            month = { dec },
-                            note = { visited on 2024-12-01 },
-                            }
-```
+
+
 
 ## 🤝 Contributing
 
