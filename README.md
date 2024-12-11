@@ -6,12 +6,12 @@
 [![Powered by Spheron](/otakuverse/web-app/public/spheron.svg)](https://spheron.network)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Otakuverse is a web app that uses AI to detect and translate text in manga panels automatically. It's being build on top of Spheron's decentralized GPU network (currenty training), which makes it fast, reliable, and accurate. Plus, it keeps the original art style intact! 🎉
+Otakuverse is a web app that uses AI to detect and translate text in manga panels automatically. It's being build on top of Spheron's decentralized GPU network (both for model training and inference), which makes it fast, reliable, and accurate. Plus, it keeps the original art style intact! 🎉
 
 ## 🌟 Features
 
-- **AI-Powered Text Detection**: Automatically detects text bubbles in manga panels using YOLOv8
-
+- **AI-Powered Text Detection**: Automatically detects text bubbles in manga panels using YOLOv8, translates them to English, and in-paints them on the image.
+- **Multiple Translation Options**: Supports various translation methods including Google, HuggingFace, Baidu, and Bing
 - **Font Customization**: Multiple manga-style fonts for natural-looking translations
 - **Responsive UI**: Beautiful, modern interface built with Next.js and Tailwind CSS
 
@@ -46,7 +46,7 @@ Otakuverse is a web app that uses AI to detect and translate text in manga panel
 - Python 3.12+
 - Docker (optional)
 
-### Installation
+### Installation (Local Setup)
 
 1. Clone the repository
 ```bash
@@ -57,7 +57,7 @@ cd otakuverse
 2. Install frontend dependencies
 ```bash
 cd web-app
-npm install
+pnpm install
 ```
 
 3. Install backend dependencies
@@ -65,6 +65,8 @@ npm install
 cd ../inference-server
 pip install -r requirements.txt
 ```
+
+NOTE: You might want to do this in a virtual environment
 
 4. Configure environment variables
 ```bash
@@ -77,7 +79,7 @@ cp .env.example .env
 1. Start the frontend
 ```bash
 cd web-app
-npm run dev
+pnpm dev
 ```
 
 2. Start the inference server
@@ -86,7 +88,7 @@ cd inference-server
 python app.py
 ```
 
-The application will be available at `http://localhost:3000`
+The web app will be available at `http://localhost:3000` and the inference server at `http://localhost:5000` or the value in the `INFERENCE_SERVER_URL` environment variable.
 
 ## 🏗️ Architecture
 

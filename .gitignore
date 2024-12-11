@@ -4,3 +4,4 @@ dataset.zip
 runs
 __pycache__
 .env.local
+my-venv
