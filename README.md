@@ -19,26 +19,53 @@ Otakuverse is an app that uses AI to detect and translate text in manga panels a
 ## 📁 Project Structure
 
 ```
-├── assets/                     # Project assets
-│   ├── logo.svg               # Otakuverse logo
-│   └── image.png              # Other image assets
-├── web-app/                   # Next.js web application
-│   ├── app/                   # Next.js app directory
-│   │   ├── page.tsx          # Home page
-│   │   └── layout.tsx        # Root layout
-│   ├── components/           # Reusable components
-│   │   ├── ui/              # UI components (buttons, cards, etc.)
-│   │   └── manga-translator.tsx  # Main manga translation component
-│   ├── lib/                  # Utility libraries
-│   │   └── utils.ts         # Utility functions
-│   ├── public/              # Public assets
-│   │   └── spheron.svg      # Spheron logo
-│   └── styles/              # Global styles
-├── server/                   # Backend server (if applicable)
-│   └── api/                 # API endpoints
-├── docker-compose.yml       # Docker compose configuration
-└── README.md               # Project documentation
+otakuverse/
+│
+├── assets/
+│   ├── image.png
+│   └── logo.svg
+│
+├── inference-server/
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── add_text.py
+│   ├── detect_bubbles.py
+│   ├── process_bubble.py
+│   ├── translator.py
+│   ├── requirements.txt
+│   ├── model.pt
+│   └── fonts/
+│
+├── training-pipeline/
+│   └── model/
+│
+├── web-app/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── public/
+│   ├── scripts/
+│   ├── Dockerfile
+│   ├── next.config.mjs
+│   ├── package.json
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
+│
+├── README.md
+├── submission.md
+├── spheron.svg
+├── spheron-dark.svg
+└── spheron-light.svg
 ```
+
+### Directory Descriptions
+
+- **`assets/`**: Contains project-related static assets
+- **`inference-server/`**: Python-based backend for image processing and inference
+  - Includes bubble detection, text addition, and translation modules
+- **`training-pipeline/`**: Machine learning model training resources
+- **`web-app/`**: Next.js frontend application
+  - Configured with Tailwind CSS and TypeScript
 
 
 ## 🚀 Quick Start
@@ -370,4 +397,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 *Note: This is a submission for the Spheron Network Bounty Program. The project demonstrates the capabilities of Spheron's decentralized infrastructure for training and hosting AI-powered applications.*
-
