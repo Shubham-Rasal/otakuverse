@@ -3,7 +3,7 @@
 # Otakuverse: AI-Powered Manga Translation Platform 🎯
 > *Powered by [Spheron Network](https://spheron.network)*
 
-[![Powered by Spheron](spheron.svg)](https://spheron.network)
+[![Powered by Spheron](spheron-light.svg)](https://spheron.network)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Otakuverse is an app that uses AI to detect and translate text in manga panels automatically. It's being build on top of Spheron's decentralized GPU network (both for model training and inference), which makes it fast, reliable, and accurate. Plus, it keeps the original art style intact! 🎉
