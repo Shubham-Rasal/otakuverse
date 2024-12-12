@@ -38,12 +38,14 @@ Otakuverse is an app that uses AI to detect and translate text in manga panels a
 │   └── api/                 # API endpoints
 ├── docker-compose.yml       # Docker compose configuration
 └── README.md               # Project documentation
+```
+
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- Python 3.12+
+- Python 3.10+
 - Docker (optional)
 
 ### Installation (Local Setup)
@@ -279,7 +281,9 @@ NEXT_PUBLIC_INFERENCE_SERVER_URL=http://provider.gpu.gpufarm.xyz:31707
 Congratulations! You have successfully deployed the inference server on the Spheron Network.
 
 
-### Training using the Spheron Network
+### Training using the Spheron Network (Optional)
+
+If you want to train the model on your own dataset, you can follow the steps below.
 
 The training pipeline is relatively straight forward with as it is a YOLOv8 model. You can find the training pipeline notebook in the [training-pipeline](training-pipeline) directory.
 
@@ -319,24 +323,6 @@ cd training-pipeline/model
 sphnctl deployment create train.yml
 ```
 
-Here is an example of how the result will look:
-
-```bash
-Validating SDL configuration.
-SDL validated.
-Sending configuration for provider matching.
-Deployment order created: 0x1ae69a3f63cf241495c3b91db620b72625bffd8b08afd0691309ca63a4773368
-Waiting for providers to bid on the deployment order...
-Bid found. 
-Order matched successfully. 
-Deployment created using wallet 0x3837215Cc8701C99C1A496B6fB9a715BFAd65262 
- lid: 2866 
- provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b 
- agreed price per hour: 0.3027243318506784 
-Sending manifest to provider...
-Deployment manifest sent, waiting for acknowledgment.
-Deployment is finished.
-```
 
 Note: Sometimes the deployment might fail as the exact configuration might not match the provider's requirements. In that case, you can try again with a different configuration. Just make sure to include atleast one GPU and CPU unit.
 
@@ -347,28 +333,6 @@ To fetch your deployment / lease details, you need to run this command to fetch 
 
 ```bash
  sphnctl deployment get --lid [your-lid]
-```
-
-Here is an example of how the result will look:
-
-```bash
-Status of the deployment ID: 2866 
-Deployment on-chain details:
- Status: Matched
- Provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b
- Price per hour: 0.3027243318506784
- Start time: 2024-12-12T06:18:38Z
- Remaining time: 55min, 25sec
-
-Services running:
-  py-cuda
-    URL: []
-    Ports:
-      - provider.gpu.gpufarm.xyz:32674 -> 8888 (TCP)
-    Replicas: 1/1 available, 1 ready
-    Host URI: provider.gpu.gpufarm.xyz
-    Region: us-central
-    IPs:
 ```
 
 This will contain URL to access the deployment server, all the assigned ports and the URI to access it. With this you can check your deployment status.
