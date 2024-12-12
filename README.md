@@ -111,15 +111,27 @@ Here is the data:
 - **Dataset**: [Manga Speech Bubbles Dataset](https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble/dataset/16)
 
 
-### Training using the Spheron Network
+### Web App
 
-The training pipeline is relatively straight forward with as it is a YOLOv8 model. You can find the training pipeline notebook in the [training-pipeline](training-pipeline) directory.
+The web app is built using Next.js and TailwindCSS. It is a simple website the handles the mange file/image upload and sends it to the inference server for processing. 
 
-The pipeline is based on the [YOLOv8 Quick Start](https://docs.ultralytics.com/quickstart/) by Ultralytics.
+### Inference Server
 
-To train this model, we will need a GPU which can be obtained from [Spheron Network](https://spheron.network).
+This the core component of the application. It is a Flask server that receives the image from the web app and processes it using OpenCV, PyTorch and various translation APIs.
 
-To train the model, we will need to follow the following steps:
+The pipeline is setup as follows:
+
+1. Receive image from web app
+2. Detect text bubbles using YOLOv8
+3. Translate text using various translation APIs
+4. In-paint translated text on the image
+5. Send processed image back to web app
+
+### Deployment of the Inference Server on the Spheron Network
+
+For the local deployment, you can refer the instructions given in the previous setions.
+
+The following steps will guide you through the process of deploying the inference server on the Spheron Network:
 
 #### 1. Install Spheron Protocol CLI (Linux, MacOS)
 
@@ -180,9 +192,116 @@ sphnctl payment deposit --amount 15 --token USDT
 ```
 
 
-#### 4. Create a Deployment for training
+#### 4. Create a Deployment 
 
-The deployment is a concept in the Spheron Network where you can request compute resources from the Network and use them for training your model. A deployment can be created using the dashboard or the Protocol CLI and the Infrastructure Composition Language (ICL).
+The deployment is a concept in the Spheron Network where you can request compute resources from the Network and use them for the inference server. A deployment can be created using the dashboard or the Protocol CLI and the Infrastructure Composition Language (ICL).
+
+The deployement configuration can be found [here](inference-server/deploy.yml).
+
+The deployment file refers to a public image - `ghcr.io/shubham-rasal/inference-server:latest` which is already been setup with a fine-tuned YOLOv8 model trained before.
+
+To create the deployment, we will need to follow the following steps:
+
+- Go to inference-server directory
+
+```bash
+cd inference-server
+```
+
+- Run the following command to create the deployment
+
+```bash
+sphnctl deployment create deploy.yml
+```
+
+Here is an example of how the result will look:
+
+```bash
+Validating SDL configuration.
+SDL validated.
+Sending configuration for provider matching.
+Deployment order created: 0x1ae69a3f63cf241495c3b91db620b72625bffd8b08afd0691309ca63a4773368
+Waiting for providers to bid on the deployment order...
+Bid found. 
+Order matched successfully. 
+Deployment created using wallet 0x3837215Cc8701C99C1A496B6fB9a715BFAd65262 
+ lid: 2866 
+ provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b 
+ agreed price per hour: 0.3027243318506784 
+Sending manifest to provider...
+Deployment manifest sent, waiting for acknowledgment.
+Deployment is finished.
+```
+
+Note: Sometimes the deployment might fail as the exact configuration might not match the provider's requirements. In that case, you can try again with a different configuration. Just make sure to include atleast one GPU and CPU unit.
+
+
+- Fetch Deployment Details
+
+To fetch your deployment / lease details, you need to run this command to fetch it:
+
+```bash
+ sphnctl deployment get --lid [your-lid]
+```
+
+Here is an example of how the result will look:
+
+```bash
+Status of the deployment ID: 2866 
+Deployment on-chain details:
+ Status: Matched
+ Provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b
+ Price per hour: 0.3027243318506784
+ Start time: 2024-12-12T06:18:38Z
+ Remaining time: 55min, 25sec
+
+Services running:
+  py-cuda
+    URL: []
+    Ports:
+      - provider.gpu.gpufarm.xyz:32674 -> 8888 (TCP)
+    Replicas: 1/1 available, 1 ready
+    Host URI: provider.gpu.gpufarm.xyz
+    Region: us-central
+    IPs:
+```
+
+This will contain URL to access the deployment server, all the assigned ports and the URI to access it. With this you can check your deployment status.
+
+Add the URL to the `NEXT_PUBLIC_INFERENCE_SERVER_URL` environment variable in the `.env` file of the [web-app](web-app/) directory.
+
+For example, here is how the `.env` file should look like:
+
+```bash
+NEXT_PUBLIC_INFERENCE_SERVER_URL=http://provider.gpu.gpufarm.xyz:31707
+```
+
+Congratulations! You have successfully deployed the inference server on the Spheron Network.
+
+
+### Training using the Spheron Network
+
+The training pipeline is relatively straight forward with as it is a YOLOv8 model. You can find the training pipeline notebook in the [training-pipeline](training-pipeline) directory.
+
+The pipeline is based on the [YOLOv8 Quick Start](https://docs.ultralytics.com/quickstart/) by Ultralytics.
+
+To train this model, we will need a GPU which can be obtained from [Spheron Network](https://spheron.network).
+
+To train the model, the first few steps are common to the deployment of the inference server :
+
+#### 1. Install Spheron Protocol CLI (Linux, MacOS) 
+
+Refer [here](#1-install-spheron-protocol-cli-linux-macos)
+
+#### 2. Create a Wallet 
+
+Refer [here](#2-create-a-wallet)
+
+#### 3. Get test tokens from the Faucet
+
+Refer [here](#3-get-test-tokens-from-the-faucet)
+
+#### 4. Create a Deployment for training
 
 The one we will base our training deployment can be found [here](https://github.com/spheronFdn/awesome-spheron/tree/main/jupyter-with-pytorch). It is a simple Jupyter notebook that uses PyTorch to train a YOLOv8 model.
 

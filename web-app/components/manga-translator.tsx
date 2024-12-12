@@ -105,7 +105,9 @@ export default function MangaTranslator() {
 
       // Make API call
       // NOTE: Replace with your API endpoint
-      const response = await fetch(`${process.env.INFERENCE_SERVER_URL}/api/translate`, {
+      const url = process.env.NEXT_PUBLIC_INFERENCE_SERVER_URL;
+      console.log(url)
+      const response = await fetch(`${url}/api/translate`, {
         method: 'POST',
         body: formData,
       });
