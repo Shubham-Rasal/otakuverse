@@ -13,7 +13,7 @@ services:
 profiles:
   name: py-cuda
   duration: 1h
-  mode: fizz
+  mode: provider
   tier:
     - community
   compute:

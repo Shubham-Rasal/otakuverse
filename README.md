@@ -106,10 +106,157 @@ The model used to identify speech bubbles is YOLOv8. Using it directly doesn't g
 
 This is done by fine-tuning the model on our own dataset. The dataset is a collection of manga images with speech bubbles annotated with the text inside them. The model is then trained on this dataset to identify the text inside the speech bubbles.
 
-Here are the data:
+Here is the data:
 
 - **Dataset**: [Manga Speech Bubbles Dataset](https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble/dataset/16)
 
+
+### Training using the Spheron Network
+
+The training pipeline is relatively straight forward with as it is a YOLOv8 model. You can find the training pipeline notebook in the [training-pipeline](training-pipeline) directory.
+
+The pipeline is based on the [YOLOv8 Quick Start](https://docs.ultralytics.com/quickstart/) by Ultralytics.
+
+To train this model, we will need a GPU which can be obtained from [Spheron Network](https://spheron.network).
+
+To train the model, we will need to follow the following steps:
+
+#### 1. Install Spheron Protocol CLI (Linux, MacOS)
+
+```bash
+curl -sL1 https://sphnctl.sh | bash
+```
+
+After installation, verify the installation by using a simple command to check the Spheron version:
+
+```bash
+sphnctl version
+```
+
+#### 2. Create a Wallet 
+
+This wallet will be used to pay for the usage of compute on the Spheron Network.
+
+```bash
+sphnctl wallet create --name <your-wallet-name>
+```
+
+Replace <your-wallet-name> with your desired wallet name. Here is an example of how the result will look:
+
+```bash
+ path: /path/to/spheron/primary.json 
+ address: 0x3837215Cc8701C99C1A496B6fB9a715BFAd65262 
+ secret: xxxxxxxx
+ mnemonic: water vicious naive nurse sample armed exit crazy game eagle blood woman 
+```
+
+_Make sure to securely save the mnemonic phrase and key secret provided._
+
+#### 3. Get test tokens from the Faucet
+
+You will need some token to deploy on Spheron. Visit the Spheron Faucet to obtain test tokens for deployment. After receiving the tokens, you can check your wallet balance with:
+
+```bash
+sphnctl wallet balance --token USDT
+```
+
+Here is an example of how the result will look:
+
+```bash
+Current ETH balance: 0.02993669528 
+Total USDT balance: 35 
+
+Deposited USDT balance
+ unlocked: 14.3307 
+ locked: 1e-06 
+```
+
+Note: You might have locked tokens. You can unlock them with:
+
+Deposit USDT to your escrow wallet for deployment:
+
+```bash
+sphnctl payment deposit --amount 15 --token USDT
+```
+
+
+#### 4. Create a Deployment for training
+
+The deployment is a concept in the Spheron Network where you can request compute resources from the Network and use them for training your model. A deployment can be created using the dashboard or the Protocol CLI and the Infrastructure Composition Language (ICL).
+
+The one we will base our training deployment can be found [here](https://github.com/spheronFdn/awesome-spheron/tree/main/jupyter-with-pytorch). It is a simple Jupyter notebook that uses PyTorch to train a YOLOv8 model.
+
+To create the deployment, we will need to follow the following steps:
+
+- Go to training-pipeline directory
+
+```bash
+cd training-pipeline/model
+```
+
+- Run the following command to create the deployment
+
+```bash
+sphnctl deployment create train.yml
+```
+
+Here is an example of how the result will look:
+
+```bash
+Validating SDL configuration.
+SDL validated.
+Sending configuration for provider matching.
+Deployment order created: 0x1ae69a3f63cf241495c3b91db620b72625bffd8b08afd0691309ca63a4773368
+Waiting for providers to bid on the deployment order...
+Bid found. 
+Order matched successfully. 
+Deployment created using wallet 0x3837215Cc8701C99C1A496B6fB9a715BFAd65262 
+ lid: 2866 
+ provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b 
+ agreed price per hour: 0.3027243318506784 
+Sending manifest to provider...
+Deployment manifest sent, waiting for acknowledgment.
+Deployment is finished.
+```
+
+Note: Sometimes the deployment might fail as the exact configuration might not match the provider's requirements. In that case, you can try again with a different configuration. Just make sure to include atleast one GPU and CPU unit.
+
+
+- Fetch Deployment Details
+
+To fetch your deployment / lease details, you need to run this command to fetch it:
+
+```bash
+ sphnctl deployment get --lid [your-lid]
+```
+
+Here is an example of how the result will look:
+
+```bash
+Status of the deployment ID: 2866 
+Deployment on-chain details:
+ Status: Matched
+ Provider: 0x5Ed271e74ff9b6aB90A7D18B7f4103D6ad361D2b
+ Price per hour: 0.3027243318506784
+ Start time: 2024-12-12T06:18:38Z
+ Remaining time: 55min, 25sec
+
+Services running:
+  py-cuda
+    URL: []
+    Ports:
+      - provider.gpu.gpufarm.xyz:32674 -> 8888 (TCP)
+    Replicas: 1/1 available, 1 ready
+    Host URI: provider.gpu.gpufarm.xyz
+    Region: us-central
+    IPs:
+```
+
+This will contain URL to access the deployment server, all the assigned ports and the URI to access it. With this you can check your deployment status.
+
+- Setup the Notebook Environment
+
+You can access your notebook environment at the url returned by the previous command. You can setup the environment by following the instructions in the [training-pipeline](training-pipeline) directory.
 
 
 
