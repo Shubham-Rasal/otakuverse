@@ -397,7 +397,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Built with ❤️ using [Spheron Network](https://spheron.network)
 - YOLOv8 for object detection
-- All our amazing contributors
 
 ## 🔗 Links
 
@@ -406,7 +405,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Demo](https://otakuverse.demo.spheron.network)
 
 ---
-*Note: This is a submission for the Spheron Network Bounty Program. The project demonstrates the capabilities of Spheron's decentralized infrastructure for hosting and storing AI-powered applications.*
+*Note: This is a submission for the Spheron Network Bounty Program. The project demonstrates the capabilities of Spheron's decentralized infrastructure for training and hosting AI-powered applications.*
 
-
-TODO:
