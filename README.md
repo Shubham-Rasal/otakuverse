@@ -19,48 +19,6 @@ Otakuverse is an app that uses AI to detect and translate text in manga panels a
 - **Responsive UI**: Beautiful, modern interface built with Next.js and Tailwind CSS
 
 
-## 📁 Project Structure
-
-```
-otakuverse/
-│
-├── assets/
-│   ├── image.png
-│   └── logo.svg
-│
-├── inference-server/
-│   ├── Dockerfile
-│   ├── app.py
-│   ├── add_text.py
-│   ├── detect_bubbles.py
-│   ├── process_bubble.py
-│   ├── translator.py
-│   ├── requirements.txt
-│   ├── model.pt
-│   └── fonts/
-│
-├── training-pipeline/
-│   └── model/
-│
-├── web-app/
-│   ├── app/
-│   ├── components/
-│   ├── lib/
-│   ├── public/
-│   ├── scripts/
-│   ├── Dockerfile
-│   ├── next.config.mjs
-│   ├── package.json
-│   ├── tailwind.config.ts
-│   └── tsconfig.json
-│
-├── README.md
-├── submission.md
-├── spheron.svg
-├── spheron-dark.svg
-└── spheron-light.svg
-```
-
 ### Directory Descriptions
 
 - **`assets/`**: Contains project-related static assets
@@ -123,6 +81,9 @@ python app.py
 The web app will be available at `http://localhost:3000` and the inference server at `http://localhost:5000` or the value in the `INFERENCE_SERVER_URL` environment variable.
 
 ## 🏗️ Architecture
+
+![image](https://github.com/user-attachments/assets/f6a5d6b4-fecf-47a9-8d6e-db6d7184a1f6)
+
 
 Otakuverse is built with a modern tech stack:
 
