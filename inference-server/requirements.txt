@@ -1,6 +1,6 @@
 numpy==1.25.2
 flask==2.3.3
-flask-cors==4.0.0
+flask-cors==6.0.0
 ultralytics==8.1.43
 manga-ocr==0.1.11
 Pillow==10.3.0
